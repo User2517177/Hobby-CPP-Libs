@@ -1,9 +1,0 @@
-﻿  BackendTesting.cpp
-A:\Microsoft Visual Studio\Source\Repos\BackendTesting\BackendTesting.cpp(4,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-A:\Microsoft Visual Studio\Source\Repos\BackendTesting\BackendTesting.cpp(4,10): error C2440: 'initializing': cannot convert from 'const char [8]' to 'int'
-  A:\Microsoft Visual Studio\Source\Repos\BackendTesting\BackendTesting.cpp(4,10):
-  There is no context in which this conversion is possible
-  
-A:\Microsoft Visual Studio\Source\Repos\BackendTesting\BackendTesting.cpp(6,1): error C2062: type 'int' unexpected
-A:\Microsoft Visual Studio\Source\Repos\BackendTesting\BackendTesting.cpp(6,12): error C2143: syntax error: missing ';' before '{'
-A:\Microsoft Visual Studio\Source\Repos\BackendTesting\BackendTesting.cpp(6,12): error C2447: '{': missing function header (old-style formal list?)

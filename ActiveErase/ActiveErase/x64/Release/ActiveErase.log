@@ -1,1 +1,7 @@
-﻿A:\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.Cpp.WindowsSDK.targets(46,5): error MSB8036: The Windows SDK version 10.0.22000.0 was not found. Install the required version of Windows SDK or change the SDK version in the project property pages or by right-clicking the solution and selecting "Retarget solution".
+﻿  ActiveErase.cpp
+  Generating code
+  1 of 359 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ActiveErase.vcxproj -> A:\Microsoft Visual Studio\Source\Repos\ActiveErase\x64\Release\ActiveErase.exe

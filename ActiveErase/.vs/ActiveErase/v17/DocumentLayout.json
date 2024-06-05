@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Source\\Repos\\ActiveErase\\",
+  "WorkspaceRootPath": "A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Source\\Repos\\ActiveErase\\ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{69FABD1B-D834-4D4A-9F89-C02622B9D999}|ActiveErase.vcxproj|A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{69FABD1B-D834-4D4A-9F89-C02622B9D999}|ActiveErase.vcxproj|solutionrelative:ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,14 +20,13 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ActiveErase.cpp",
-              "DocumentMoniker": "C:\\Users\\User\\Source\\Repos\\ActiveErase\\ActiveErase.cpp",
+              "DocumentMoniker": "A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\ActiveErase.cpp",
               "RelativeDocumentMoniker": "ActiveErase.cpp",
-              "ToolTip": "C:\\Users\\User\\Source\\Repos\\ActiveErase\\ActiveErase.cpp",
+              "ToolTip": "A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\ActiveErase.cpp",
               "RelativeToolTip": "ActiveErase.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAADIAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-04-27T02:43:57.594Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-06-04T12:03:20.107Z",
               "EditorCaption": ""
             }
           ]
