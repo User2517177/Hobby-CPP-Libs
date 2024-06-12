@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{69fabd1b-d834-4d4a-9f89-c02622b9d999}</ProjectGuid>
+    <ProjectGuid>{920bd0d1-e3b1-46c0-816e-d56056198201}</ProjectGuid>
     <RootNamespace>ActiveErase</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

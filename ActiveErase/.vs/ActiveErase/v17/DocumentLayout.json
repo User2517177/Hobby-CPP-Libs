@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{69FABD1B-D834-4D4A-9F89-C02622B9D999}|ActiveErase.vcxproj|A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{69FABD1B-D834-4D4A-9F89-C02622B9D999}|ActiveErase.vcxproj|solutionrelative:ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{920BD0D1-E3B1-46C0-816E-D56056198201}|ActiveErase.vcxproj|A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{920BD0D1-E3B1-46C0-816E-D56056198201}|ActiveErase.vcxproj|solutionrelative:ActiveErase.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,9 +24,9 @@
               "RelativeDocumentMoniker": "ActiveErase.cpp",
               "ToolTip": "A:\\Microsoft Visual Studio\\Source\\Repos\\ActiveErase\\ActiveErase.cpp",
               "RelativeToolTip": "ActiveErase.cpp",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAAADIAAAAZAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACEAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-04T12:03:20.107Z",
+              "WhenOpened": "2024-06-06T12:34:45.78Z",
               "EditorCaption": ""
             }
           ]
