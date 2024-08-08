@@ -1,7 +1,8 @@
 #include <iostream>
-#include <fstream>
+//#include <fstream>
 #include <string>
 #include <filesystem>
+#include <windows.h>
 using namespace std;
 bool IsCalled = false;
 bool IsDebug = false;
@@ -32,7 +33,6 @@ static short ShowHelp() {
 }
 
 int main(int argc, char* argv[]) {
-	cout << endl;
 	// Check debug request
 	if (filesystem::exists("Debug")) {
 		IsDebug = true;
@@ -65,8 +65,6 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	// Size And Var Setup
-	unsigned long long index = 0;
-	unsigned short OuterIndex = 0;
 	unsigned long long TargetIndex = 0;
 	const unsigned int bindex = 1;
 	const unsigned short kbindex = 1024;
@@ -74,9 +72,9 @@ int main(int argc, char* argv[]) {
 	const unsigned int gbindex = 1073741824;
 	const unsigned long long tbindex = 1099511627776;
 	string ArgContent = argv[2];
-	string IfAppendEnabled = argv[3];
+	const char* IfAppendEnabled = argv[3];
 	// Append arg.check
-	string FilePath;
+	const char* FilePath;
 	if (IfAppendEnabled == "Append" || IfAppendEnabled == "append") {
 		if (argc < 5) {
 			return ErrorExitSeq(true, 1, "Append enabled, but no file path.");
@@ -89,14 +87,29 @@ int main(int argc, char* argv[]) {
 			ErrorExitSeq(false, 1, "Append is not found, but there is more than 3 arguments. Therefore, ignoring arguments after the third argument. Check if you have mistype the word Append, or else the mistype word Append is used as the file name, which you might not want to.");
 		}
 	}
-	ofstream file(FilePath, ios::app);
+	HANDLE hFile = CreateFileA(
+		FilePath,           // lpFileName
+		GENERIC_WRITE,      // dwDesiredAccess
+		0,                  // dwShareMode
+		NULL,               // lpSecurityAttributes
+		CREATE_ALWAYS,      // dwCreationDisposition
+		FILE_ATTRIBUTE_NORMAL, // dwFlagsAndAttributes
+		NULL                // hTemplateFile
+	);
+	
 	if (IfAppendEnabled == "Append" || IfAppendEnabled == "append") {
-		ofstream file(FilePath, ios::app);
+		CloseHandle(hFile);
+		HANDLE hFile = CreateFileA(
+			FilePath,           // lpFileName
+			GENERIC_WRITE | FILE_APPEND_DATA,   // dwDesiredAccess
+			0,                  // dwShareMode
+			NULL,               // lpSecurityAttributes
+			OPEN_ALWAYS,        // dwCreationDisposition
+			FILE_ATTRIBUTE_NORMAL, // dwFlagsAndAttributes
+			NULL                // hTemplateFile
+		);
 	}
-	else {
-		ofstream file(FilePath);
-	}
-	if (file.fail()) {
+	if (hFile == INVALID_HANDLE_VALUE) {
 		ErrorExitSeq(true, 1, "File can't be opened. Either disk full or file in use");
 	}
 	// Map size to preset size
@@ -106,6 +119,8 @@ int main(int argc, char* argv[]) {
 	else if (ArgContent == "GB" || ArgContent == "Gb" || ArgContent == "gB" || ArgContent == "gb") { TargetIndex = gbindex; }
 	else if (ArgContent == "TB" || ArgContent == "Tb" || ArgContent == "tB" || ArgContent == "tb") { TargetIndex = tbindex; }
 	else { return ErrorExitSeq(true, 1, "Invalid size unit."); };
+	LARGE_INTEGER size;
+	size.QuadPart = TargetIndex * count;
 	// Debug output
 	if (IsDebug) {
 		cout << "Current TargetIndex: " << TargetIndex << endl;
@@ -114,18 +129,11 @@ int main(int argc, char* argv[]) {
 		cout << "IfAppendEnabled: " << IfAppendEnabled << endl;
 	}
 	// Main filling loop
-	while (OuterIndex != count) {
-		index = 0;
-		while (index != TargetIndex) {
-			index = index + 1;
-			if (IsDebug) { cout << index << " Bytes written" << endl; }
-			file.put('\0');
-			if (file.fail()) {
-				return ErrorExitSeq(true, 1, "^Ignore the upper text. No offense.^ Disk is full halfway");
-			}
-		}
-		OuterIndex = OuterIndex + 1;
-		cout << "Pass " << OuterIndex << " complete"  << endl;
+	SetFilePointer(hFile, size.LowPart, &size.HighPart, FILE_BEGIN);
+	SetEndOfFile(hFile);
+	if (hFile == INVALID_HANDLE_VALUE) {
+		return ErrorExitSeq(true, 1, "^Ignore the upper text. No offense.^ Disk is full halfway");
 	}
+	CloseHandle(hFile);
 	return 0;
 }
