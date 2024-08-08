@@ -28,7 +28,7 @@ static short ErrorExitSeq(bool IsExit, short exitcode, string reason) {
 }
 
 static short ShowHelp() {
-	cout << "Usage: <size> <size unit> [Append] <file path>" << endl << "Where:" << endl << endl << "<size>: Ranging from 0 - 1024 for each unit." << endl << "<size unit>: B, KB, MB, GB and TB. (Upper/Lower is OK)" << endl << "[Append]: Add append to continue filling the file." << endl << "<file path>: Path to the target file to fill. Typically uses a empty file for that." << endl;
+	cout << "Usage: <size> <size unit> [Append] <file path>" << endl << "Where:" << endl << endl << "<size>: Ranging from 0 - 1024 for each unit." << endl << "<size unit>: B, KB, MB, GB and TB. (Upper/Lower is OK)" << endl << "[Append]: Add append to continue filling the file." << endl << "<file path>: Path to the target file to fill. Typically uses a empty file for that." << endl << "Note: For unit \"B\", range restriction is not enforced." << endl;
 	return 0;
 }
 
@@ -36,8 +36,9 @@ int main(int argc, char* argv[]) {
 	// Check debug request
 	if (filesystem::exists("Debug")) {
 		IsDebug = true;
+		cout << "Debug is ON" << endl << "Debug status is " << IsDebug << endl;
 	}
-	unsigned short count;
+	unsigned long long TargetSize;
 	// Command Check
 	if (argc < 2) {
 		ShowHelp();
@@ -45,13 +46,13 @@ int main(int argc, char* argv[]) {
 	}
 	if (argc > 3) {
 		try {
-			count = stoi(argv[1]);
+			TargetSize = stoull(argv[1]);
 		}
 		catch (const invalid_argument) {
 			return ErrorExitSeq(true, 1, "There exist input of character other than number.");
 		}
-		if (count > 1024) {
-			return ErrorExitSeq(true, 1, "If you want size larger than 1024, you better off choosing a larger size unit. (The max possible value is 1024 TB.)");
+		catch (const out_of_range) {
+			return ErrorExitSeq(true, 1, "Number too large.");
 		}
 	}
 	else {
@@ -65,8 +66,8 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	// Size And Var Setup
-	unsigned long long TargetIndex = 0;
-	const unsigned int bindex = 1;
+	unsigned long long SizePreset = 0;
+	const unsigned short bindex = 1;
 	const unsigned short kbindex = 1024;
 	const unsigned int mbindex = 1048576;
 	const unsigned int gbindex = 1073741824;
@@ -85,6 +86,12 @@ int main(int argc, char* argv[]) {
 		FilePath = argv[3];
 		if (argc > 4) {
 			ErrorExitSeq(false, 1, "Append is not found, but there is more than 3 arguments. Therefore, ignoring arguments after the third argument. Check if you have mistype the word Append, or else the mistype word Append is used as the file name, which you might not want to.");
+		}
+	}
+	if (TargetSize > 1024) {
+		if (ArgContent == "B" || ArgContent == "b") {}
+		else {
+			return ErrorExitSeq(true, 1, "If you want size larger than 1024, you better off choosing a larger size unit. (The max possible value is 1024 TB.)");
 		}
 	}
 	HANDLE hFile = CreateFileA(
@@ -108,23 +115,25 @@ int main(int argc, char* argv[]) {
 			FILE_ATTRIBUTE_NORMAL, // dwFlagsAndAttributes
 			NULL                // hTemplateFile
 		);
+		cout << "Apparently append does not work.";
 	}
 	if (hFile == INVALID_HANDLE_VALUE) {
 		ErrorExitSeq(true, 1, "File can't be opened. Either disk full or file in use");
 	}
 	// Map size to preset size
-	if (ArgContent == "B" || ArgContent == "b") { TargetIndex = bindex; }
-	else if (ArgContent == "KB" || ArgContent == "Kb" || ArgContent == "kB" || ArgContent == "kb") { TargetIndex = kbindex; }
-	else if (ArgContent == "MB" || ArgContent == "Mb" || ArgContent == "mB" || ArgContent == "mb") { TargetIndex = mbindex; }
-	else if (ArgContent == "GB" || ArgContent == "Gb" || ArgContent == "gB" || ArgContent == "gb") { TargetIndex = gbindex; }
-	else if (ArgContent == "TB" || ArgContent == "Tb" || ArgContent == "tB" || ArgContent == "tb") { TargetIndex = tbindex; }
+	if (ArgContent == "B" || ArgContent == "b") { SizePreset = bindex; }
+	else if (ArgContent == "KB" || ArgContent == "Kb" || ArgContent == "kB" || ArgContent == "kb") { SizePreset = kbindex; }
+	else if (ArgContent == "MB" || ArgContent == "Mb" || ArgContent == "mB" || ArgContent == "mb") { SizePreset = mbindex; }
+	else if (ArgContent == "GB" || ArgContent == "Gb" || ArgContent == "gB" || ArgContent == "gb") { SizePreset = gbindex; }
+	else if (ArgContent == "TB" || ArgContent == "Tb" || ArgContent == "tB" || ArgContent == "tb") { SizePreset = tbindex; }
 	else { return ErrorExitSeq(true, 1, "Invalid size unit."); };
 	LARGE_INTEGER size;
-	size.QuadPart = TargetIndex * count;
+	size.QuadPart = SizePreset * TargetSize;
 	// Debug output
 	if (IsDebug) {
-		cout << "Current TargetIndex: " << TargetIndex << endl;
-		cout << "Count: " << count << endl;
+		cout << "Current SizePreset: " << SizePreset << endl;
+		cout << "TargetSize: " << TargetSize << endl;
+		cout << "Size: " << size.QuadPart << endl;
 		cout << "FilePath: " << FilePath << endl;
 		cout << "IfAppendEnabled: " << IfAppendEnabled << endl;
 	}
