@@ -28,7 +28,7 @@ static short ErrorExitSeq(bool IsExit, short exitcode, string reason) {
 }
 
 static short ShowHelp() {
-	cout << "Usage: <size> <size unit> [Append] <file path>" << endl << "Where:" << endl << endl << "<size>: Ranging from 0 - 1024 for each unit." << endl << "<size unit>: B, KB, MB, GB and TB. (Upper/Lower is OK)" << endl << "[Append]: Add append to continue filling the file." << endl << "<file path>: Path to the target file to fill. Typically uses a empty file for that." << endl << "Note: For unit \"B\", range restriction is not enforced." << endl;
+	cout << "Usage: <size> <size unit> [Append] <file path>" << endl << "Where:" << endl << endl << "<size>: Ranging from 0 - 1024 for each unit." << endl << "<size unit>: B, KB, MB, GB and TB. (Upper/Lower is OK)" << endl << "[Append]: Add append to continue filling the file." << endl << "<file path>: Path to the target file to fill. Typically uses a empty file for that." << endl << "Note:" << endl << "For unit \"B\", range restriction is not enforced." << endl << "Append does call the handle to open the file as append, but apparently does not work." << endl;
 	return 0;
 }
 
